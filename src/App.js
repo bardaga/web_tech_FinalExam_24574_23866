@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
+import Students from './components/Students';
+import Courses from './components/Courses';
+import Attendance from './components/Attendance';
+import GlobalSearch from './components/GlobalSearch';
 
-function App() {
+import Classes from './components/Classes';
+import Logout from './components/Logout';
+import AuthPage from './components/AuthPage'; // Add this import
+import TwoFactorAuth from './components/TwoFactorAuth'; 
+import StudentProfile from './components/StudentProfile';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AuthPage />} /> {/* Add this route */}
+        <Route path="/2fa" element={<TwoFactorAuth/>} />
+        <Route path="/student_profile" element={<StudentProfile/>} />
+        <Route path="/dashboard" element={<Dashboard />}>
+        
+        
+          <Route index element={<>Dashboard Overview</>} />
+          <Route path="students" element={<Students />} />
+          <Route path="classes" element={<Classes />} />
+          <Route path="global-search" element={<GlobalSearch />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="attendance" element={<Attendance />} />
+          <Route path="logout" element={<Logout />} />
+        </Route>
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
