@@ -1,0 +1,95 @@
+import React from 'react';
+import { 
+  LayoutDashboard, 
+  Users, 
+  GraduationCap, 
+  Book, 
+  BarChart, 
+  Settings, 
+  LogOut 
+} from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+
+const Dashboard = () => {
+  const stats = [
+    {
+      title: 'Total Students',
+      value: '1,234',
+      color: 'bg-blue-500'
+    },
+    {
+      title: 'Staff Members',
+      value: '56',
+      color: 'bg-green-500'
+    },
+    {
+      title: 'Courses Offered',
+      value: '42',
+      color: 'bg-yellow-500'
+    }
+  ];
+
+  const sidebarItems = [
+    { icon: LayoutDashboard, label: 'Dashboard' },
+    { icon: Users, label: 'Students' },
+    { icon: GraduationCap, label: 'Staff' },
+    { icon: Book, label: 'Courses' },
+    { icon: BarChart, label: 'Attendance' },
+    { icon: Settings, label: 'Settings' },
+    { icon: LogOut, label: 'Logout' }
+  ];
+
+  return (
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <div className="w-64 bg-gray-900 text-white">
+        <div className="p-4 text-center border-b border-gray-700">
+          <h3 className="text-xl font-bold">AUCA SmartStudent</h3>
+        </div>
+        <nav className="mt-4">
+          {sidebarItems.map((item, index) => (
+            <div 
+              key={index} 
+              className="px-4 py-3 hover:bg-gray-800 cursor-pointer border-b border-gray-700 flex items-center"
+            >
+              <item.icon className="mr-3" size={20} />
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </nav>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 bg-gray-100 p-6">
+        <header className="bg-gray-900 text-white p-4 rounded-lg mb-6">
+          <h2 className="text-2xl text-center">Welcome to AUCA SmartStudent Dashboard</h2>
+        </header>
+
+        <div className="grid grid-cols-3 gap-6 mb-6">
+          {stats.map((stat, index) => (
+            <Card key={index} className={cn('text-white', stat.color)}>
+              <CardHeader>
+                <CardTitle>{stat.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-3xl font-bold">{stat.value}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent Activities</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Here you can see the latest activities and updates in the system.</p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
